@@ -40,5 +40,5 @@ return Marionette.ItemView.extend({
 
 # Changelog
 
-## 0.0.1
+## 0.0.2
 - Added check to use triggerMethod only if view is not yet destroyed.
