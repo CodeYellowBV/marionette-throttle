@@ -10,11 +10,17 @@ define(function (require) {
         isEnabled: {},
         enable: function (method) {
             this.isEnabled[method] = true;
-            this.view.triggerMethod('throttle:' + method + ':enabled');
+
+            if (!this.view.isDestroyed) {
+                this.view.triggerMethod('throttle:' + method + ':enabled');
+            }
         },
         disable: function (method) {
             this.isEnabled[method] = false;
-            this.view.triggerMethod('throttle:' + method + ':disabled');
+
+            if (!this.view.isDestroyed) {
+                this.view.triggerMethod('throttle:' + method + ':disabled');
+            }
         },
         initialize: function () {
             _.each(this.options.methods, function (method) {
