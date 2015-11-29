@@ -40,5 +40,9 @@ return Marionette.ItemView.extend({
 
 # Changelog
 
+## 0.0.3
+- Add option `className` which defaults to  `throttled`. You can use this for styling.
+- Upgraded build tools.
+
 ## 0.0.2
 - Added check to use triggerMethod only if view is not yet destroyed.
