@@ -40,6 +40,9 @@ return Marionette.ItemView.extend({
 
 # Changelog
 
+## 0.0.4
+- Typo.
+
 ## 0.0.3
 - Add option `className` which defaults to  `throttled`. You can use this for styling.
 - Upgraded build tools.

@@ -15,10 +15,6 @@ export default Marionette.Behavior.extend({
 
             if ($el && $el.removeClass) {
                 $el.removeClass(this.options.className);
-
-                if ($el && $el.addClass) {
-                    $el.addClass(this.options.className);
-                }
             }
         }
     },
