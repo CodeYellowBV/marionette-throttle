@@ -92,7 +92,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.view.triggerMethod('throttle:' + method + ':disabled');
 
 	            if ($el && $el.addClass) {
-	                $el.removeClass(this.options.className);
+	                $el.addClass(this.options.className);
 	            }
 	        }
 	    },

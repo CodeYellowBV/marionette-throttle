@@ -1,6 +1,6 @@
 {
   "name": "marionette-throttle",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Burhan Zainuddin <burhan@codeyellow.nl>",
   "description": "Behavior for throttling methods.",
   "repository": {
