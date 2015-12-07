@@ -13,8 +13,16 @@ export default {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader?blacklist[]=strict',
+                loader: 'babel',
             },
         ],
+    },
+    externals: {
+        underscore: {
+            root: '_',
+            commonjs: 'underscore',
+            commonjs2: 'underscore',
+            amd: 'underscore',
+        },
     },
 };

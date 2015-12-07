@@ -13,8 +13,9 @@ export default Marionette.Behavior.extend({
         if (!this.view.isDestroyed) {
             this.view.triggerMethod('throttle:' + method + ':enabled');
 
-            if ($el && $el.removeClass) {
+            if ($el) {
                 $el.removeClass(this.options.className);
+                $el.prop('disabled', false);
             }
         }
     },
@@ -24,8 +25,9 @@ export default Marionette.Behavior.extend({
         if (!this.view.isDestroyed) {
             this.view.triggerMethod('throttle:' + method + ':disabled');
 
-            if ($el && $el.addClass) {
+            if ($el) {
                 $el.addClass(this.options.className);
+                $el.prop('disabled', true);
             }
         }
     },
@@ -35,10 +37,10 @@ export default Marionette.Behavior.extend({
             this.isEnabled[method] = true;
 
             // Wrap original method.
-            this.view[method] = ((original) => {
+            this.view[method] = ((original, ...args) => {
                 return (e) => {
                     if (this.isEnabled[method]) {
-                        const xhr = original.apply(this.view, arguments);
+                        const xhr = original.apply(this.view, args);
                         let $el = null;
 
                         if (e && e.currentTarget) {
