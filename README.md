@@ -66,6 +66,9 @@ If you also want to programmatically call the `save` action (e.g. `this.save()`)
 
 # Changelog
 
+## 0.1.1
+- Unify enable / disable code.
+
 ## 0.1.0
 - Backbone & marionette aren't included in the dist anymore.
 - Add support for form submit.

@@ -7,21 +7,7 @@ export default Marionette.Behavior.extend({
         className: 'throttled',
     },
     isEnabled: {},
-    enable(method, $el) {
-        this.isEnabled[method] = true;
-
-        if (!this.view.isDestroyed) {
-            this.view.triggerMethod('throttle:' + method + ':enabled');
-
-            if ($el) {
-                $el.removeClass(this.options.className);
-                $el.prop('disabled', false);
-            }
-        }
-    },
-    disable(method, $el) {
-        this.isEnabled[method] = false;
-
+    toggleEl(method, $el, enable) {
         if (!this.view.isDestroyed) {
             this.view.triggerMethod('throttle:' + method + ':disabled');
 
@@ -30,12 +16,20 @@ export default Marionette.Behavior.extend({
                 // using for example an enter, the className is properly
                 // bound.
                 if ($el.is('form')) {
-                    $el.find('[type="submit"]').addClass(this.options.className).prop('disabled', true);
+                    $el.find('[type="submit"]').toggleClass(this.options.className, enable).prop('disabled', enable);
                 }
 
-                $el.addClass(this.options.className).prop('disabled', true);
+                $el.toggleClass(this.options.className, enable).prop('disabled', enable);
             }
         }
+    },
+    enable(method, $el) {
+        this.isEnabled[method] = true;
+        this.toggleEl(method, $el, false);
+    },
+    disable(method, $el) {
+        this.isEnabled[method] = false;
+        this.toggleEl(method, $el, true);
     },
     initialize() {
         _.each(this.options.methods, (method) => {
