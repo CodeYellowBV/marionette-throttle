@@ -111,11 +111,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            // Wrap original method.
 	            _this.view[method] = (function (original) {
-	                for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-	                    args[_key - 1] = arguments[_key];
-	                }
+	                return function () {
+	                    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	                        args[_key] = arguments[_key];
+	                    }
 
-	                return function (e) {
+	                    var e = args[0];
+
 	                    if (_this.isEnabled[method]) {
 	                        var _ret = (function () {
 	                            var xhr = original.apply(_this.view, args);
