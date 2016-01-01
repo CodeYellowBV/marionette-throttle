@@ -26,8 +26,14 @@ export default Marionette.Behavior.extend({
             this.view.triggerMethod('throttle:' + method + ':disabled');
 
             if ($el) {
-                $el.addClass(this.options.className);
-                $el.prop('disabled', true);
+                // Special case forms, so that if a submit is triggered
+                // using for example an enter, the className is properly
+                // bound.
+                if ($el.is('form')) {
+                    $el.find('[type="submit"]').addClass(this.options.className).prop('disabled', true);
+                }
+
+                $el.addClass(this.options.className).prop('disabled', true);
             }
         }
     },
@@ -45,6 +51,12 @@ export default Marionette.Behavior.extend({
 
                         if (e && e.currentTarget) {
                             $el = this.view.$(e.currentTarget);
+                        }
+
+                        // Prevent default action. We don't want to submit a
+                        // form for example.
+                        if (e && e.preventDefault) {
+                            e.preventDefault();
                         }
 
                         if (xhr && xhr.always) {

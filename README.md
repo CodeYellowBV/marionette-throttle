@@ -38,7 +38,38 @@ return Marionette.ItemView.extend({
 
 ```
 
+Normally you will only have 1 button which triggers an action:
+
+```
+    events: {
+        'click @ui.saveButton': 'save'
+    },
+    save: function (e) {
+        // Some save action.
+    }
+```
+
+If you also want to programmatically call the `save` action (e.g. `this.save()`), then it is recommended to split the save into two functions. This way you can throttle `saveByEvent` and use the `save` function programmatically without being throttled.
+
+```
+    events: {
+        'click @ui.saveButton': 'saveByEvent'
+    },
+    saveByEvent: function () {
+        this.save();
+    },
+    save: function () {
+        // Some save action.
+    }
+```
+
+
 # Changelog
+
+## 0.1.0
+- Backbone & marionette aren't included in the dist anymore.
+- Add support for form submit.
+- Call preventDefault by default.
 
 ## 0.0.5
 - Typo.

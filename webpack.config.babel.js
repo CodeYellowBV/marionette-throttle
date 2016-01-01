@@ -18,6 +18,18 @@ export default {
         ],
     },
     externals: {
+        backbone: {
+            root: 'Backbone',
+            commonjs: 'backbone',
+            commonjs2: 'backbone',
+            amd: 'backbone',
+        },
+        'backbone.marionette': {
+            root: 'Backbone.Marionette',
+            commonjs: 'backbone.marionette',
+            commonjs2: 'backbone.marionette',
+            amd: 'backbone.marionette',
+        },
         underscore: {
             root: '_',
             commonjs: 'underscore',
