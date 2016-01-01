@@ -78,21 +78,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        className: 'throttled'
 	    },
 	    isEnabled: {},
-	    enable: function enable(method, $el) {
-	        this.isEnabled[method] = true;
-
-	        if (!this.view.isDestroyed) {
-	            this.view.triggerMethod('throttle:' + method + ':enabled');
-
-	            if ($el) {
-	                $el.removeClass(this.options.className);
-	                $el.prop('disabled', false);
-	            }
-	        }
-	    },
-	    disable: function disable(method, $el) {
-	        this.isEnabled[method] = false;
-
+	    toggleEl: function toggleEl(method, $el, enable) {
 	        if (!this.view.isDestroyed) {
 	            this.view.triggerMethod('throttle:' + method + ':disabled');
 
@@ -101,12 +87,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	                // using for example an enter, the className is properly
 	                // bound.
 	                if ($el.is('form')) {
-	                    $el.find('[type="submit"]').addClass(this.options.className).prop('disabled', true);
+	                    $el.find('[type="submit"]').toggleClass(this.options.className, enable).prop('disabled', enable);
 	                }
 
-	                $el.addClass(this.options.className).prop('disabled', true);
+	                $el.toggleClass(this.options.className, enable).prop('disabled', enable);
 	            }
 	        }
+	    },
+	    enable: function enable(method, $el) {
+	        this.isEnabled[method] = true;
+	        this.toggleEl(method, $el, false);
+	    },
+	    disable: function disable(method, $el) {
+	        this.isEnabled[method] = false;
+	        this.toggleEl(method, $el, true);
 	    },
 	    initialize: function initialize() {
 	        var _this = this;
