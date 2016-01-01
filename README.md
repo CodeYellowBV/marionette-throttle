@@ -66,6 +66,9 @@ If you also want to programmatically call the `save` action (e.g. `this.save()`)
 
 # Changelog
 
+## 0.1.2
+- Fix bug in passing through arguments.
+
 ## 0.1.1
 - Unify enable / disable code.
 

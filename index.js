@@ -37,8 +37,10 @@ export default Marionette.Behavior.extend({
             this.isEnabled[method] = true;
 
             // Wrap original method.
-            this.view[method] = ((original, ...args) => {
-                return (e) => {
+            this.view[method] = ((original) => {
+                return (...args) => {
+                    const e = args[0];
+
                     if (this.isEnabled[method]) {
                         const xhr = original.apply(this.view, args);
                         let $el = null;
