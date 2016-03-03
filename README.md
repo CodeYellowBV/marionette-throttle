@@ -1,8 +1,12 @@
 # marionette-throttle
 
-Throttle methods! This is commonly used to disable multiple clicks on a button. 
-Each method which you want to throttle should return a promise. Every time a 
-method is invoked, an event is dispatched.  
+Throttle methods! This is commonly used to disable multiple clicks on a button.
+Each method which you want to throttle should return a promise. Every time a
+method is invoked, an event is dispatched.
+
+```
+$ npm install marionette-throttle --save
+```
 
 ## Usage
 
@@ -22,7 +26,7 @@ return Marionette.ItemView.extend({
         // Method name inside event string.
         throttle:save:enabled: 'enableSomeCssStuff',
         throttle:save:disabled: 'disableSomeCssStuff',
-          
+
         // Method name as an argument.
         throttle:enabled: function (methodeName) {},
         throttle:disabled: function (methodeName) {}
@@ -31,7 +35,7 @@ return Marionette.ItemView.extend({
     // the behavor `methods` config.
     save: function (e) {
         e.preventDefault();
- 
+
         return this.view.model.save();
     }
 })
