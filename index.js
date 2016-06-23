@@ -36,6 +36,11 @@ export default Marionette.Behavior.extend({
             // Enable all methods.
             this.isEnabled[method] = true;
 
+            // Check that method actually exists.
+            if (!_.isFunction(this.view[method])) {
+                throw new Error('marionette-throttle: method ' + method + ' does not exist!');
+            }
+
             // Wrap original method.
             this.view[method] = ((original) => {
                 return (...args) => {
