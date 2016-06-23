@@ -60,6 +60,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: true
 	});
 
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 	var _backbone = __webpack_require__(1);
 
 	var _backbone2 = _interopRequireDefault(_backbone);
@@ -69,8 +71,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _underscore2 = _interopRequireDefault(_underscore);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
 
 	exports.default = _backbone2.default.Behavior.extend({
 	    defaults: {
@@ -109,8 +109,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	            // Enable all methods.
 	            _this.isEnabled[method] = true;
 
+	            // Check that method actually exists.
+	            if (!_underscore2.default.isFunction(_this.view[method])) {
+	                throw new Error('marionette-throttle: method ' + method + ' does not exist!');
+	            }
+
 	            // Wrap original method.
-	            _this.view[method] = (function (original) {
+	            _this.view[method] = function (original) {
 	                return function () {
 	                    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
 	                        args[_key] = arguments[_key];
@@ -119,7 +124,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    var e = args[0];
 
 	                    if (_this.isEnabled[method]) {
-	                        var _ret = (function () {
+	                        var _ret = function () {
 	                            var xhr = original.apply(_this.view, args);
 	                            var $el = null;
 
@@ -144,12 +149,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            return {
 	                                v: xhr
 	                            };
-	                        })();
+	                        }();
 
 	                        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	                    }
 	                };
-	            })(_this.view[method]);
+	            }(_this.view[method]);
 	        });
 	    }
 	});
